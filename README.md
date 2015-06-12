@@ -21,8 +21,9 @@ This is the environment used to implement the wireless network with EAP authenti
 
 ##Usage:
 This are steps to setup a radius server using this configuration. The assumption is you have already succesfully installed a FreeRADIUS. 
+
 1 Copy all the files in this repository to `/etc/freeradius`.
-2 Create a new database for your FreeRADIUS server.
+ 2 Create a new database for your FreeRADIUS server.
 3 Copy over the sample database.  
 
 Alternatively, you can use this [Docker image](https://hub.docker.com/u/zhex900/) for this configuration.
