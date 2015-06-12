@@ -5,18 +5,18 @@ This repository contains all the configuration files for FreeRADIUS v. 3 (FR3). 
 ##Features:
 * Wireless access using EAP authentication. Wireless users log onto the WIFI using username and password. Each user will have a its own profile. This profile contains: mobile number, email, first name, last name etc.   
 * Each user's network traffic will be limited to monthly quota. This includes both uploads and downloads. Once the quota is reached, user will be disconnected from the network. An user can use access the wireless network, when the quota is not reached.
- * Reset user's network quota every month.
- * Users can be managed via user groups. This means that the same network policy can be applied to a group of users. A network policy could be like, 50 G of quota and reset on 3rd of every month.
+* Reset user's network quota every month.
+* Users can be managed via user groups. This means that the same network policy can be applied to a group of users. A network policy could be like, 50 G of quota and reset on 3rd of every month.
 * Restrict users to certain network access points.
 * Send user data usage warning messages via email and SMS. Once the user reached 50%, 80% or 100% of its quota, a warning message will be sent through both email and SMS.
 
-This is the environment used to implement this wireless network using EAP authentication.  
+This is the environment used to implement the wireless network with EAP authentication.  
 ##Environment: 
-*Email server:  mailgun, 
-*SMS gateway: [smsgateway.me](smsgateway.me). 
-*NAS (dynamic ip): Mikrotik
-*Radius server (static ip): FreeRADIUS Version 3 hosted with CoreOS + Docker.
-*GUI for user management: [OWUMS](https://github.com/openwisp/OpenWISP-User-Management-System/wiki) hosted with CoreOS + Docker.
+* Email server:  mailgun, 
+* SMS gateway: [smsgateway.me](smsgateway.me). 
+* NAS (dynamic ip): Mikrotik
+* Radius server (static ip): FreeRADIUS Version 3 hosted with CoreOS + Docker.
+* GUI for user management: [OWUMS](https://github.com/openwisp/OpenWISP-User-Management-System/wiki) hosted with CoreOS + Docker.
 
 ##Usage:
 
