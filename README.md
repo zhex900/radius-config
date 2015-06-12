@@ -1,3 +1,4 @@
+# DRAFT! THIS IS A WORKING IN PROGRESS.
 # An implementation of EAP/802.1x Wireless Network with FreeRADIUS Version 3
 
 This repository contains all the configuration files for FreeRADIUS v. 3 (FR3). FR3 is use to implement an EAP/802.1x wireless network. FR3 is configured to implement the following features. 
@@ -12,14 +13,22 @@ This repository contains all the configuration files for FreeRADIUS v. 3 (FR3). 
 
 This is the environment used to implement the wireless network with EAP authentication.  
 ##Environment: 
-* Email server:  mailgun, 
+* Email server:  mailgun.
 * SMS gateway: [smsgateway.me](smsgateway.me). 
-* NAS (dynamic ip): Mikrotik
+* NAS (dynamic ip): Mikrotik.
 * Radius server (static ip): FreeRADIUS Version 3 hosted with CoreOS + Docker.
 * GUI for user management: [OWUMS](https://github.com/openwisp/OpenWISP-User-Management-System/wiki) hosted with CoreOS + Docker.
 
 ##Usage:
+This are steps to setup a radius server using this configuration. The assumption is you have already succesfully installed a FreeRADIUS. 
+1. Copy all the files in this repository to `/etc/freeradius`.
+2. Create a new database for your FreeRADIUS server.
+3. Copy over the sample database.  
 
+Alternatively, you can use this [Docker image](https://hub.docker.com/u/zhex900/) for this configuration.
+
+###Configuration:
+  
 This guide is to show you how to configure free radius to implement the above features base upon the above environment. Any things beyond the aforementioned features and environment will be exceeding the scope of this guide. All the necessary configurations files are published here. You only need to change some basic settings to get it working in your environment. This guide is to show you how what these settings are and how to change it.
 
 As a way of self documentation, this guide will also explain how the mentioned features are implemented. To understand how this
