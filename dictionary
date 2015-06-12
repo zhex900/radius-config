@@ -47,3 +47,11 @@
 #ATTRIBUTE	My-Local-String		3000	string
 #ATTRIBUTE	My-Local-IPAddr		3001	ipaddr
 #ATTRIBUTE	My-Local-Integer	3002	integer
+
+ATTRIBUTE       Total-Bytes     3000    string
+ATTRIBUTE       Used-Bytes      3001    string
+ATTRIBUTE       Avail-Bytes     3002    string
+ATTRIBUTE       Reset-Date      3003    integer
+ATTRIBUTE       Email           3004    string
+ATTRIBUTE       Sent-Mail       3005    string
+ATTRIBUTE       Site            3006    string
