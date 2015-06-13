@@ -1,4 +1,3 @@
-# DRAFT! THIS IS A WORKING IN PROGRESS.
 # An implementation of EAP/802.1x Wireless Network with FreeRADIUS Version 3
 
 This repository contains all the configuration files for FreeRADIUS v. 3 (FR3). FR3 is use to implement an EAP/802.1x wireless network. FR3 is configured to implement the following features. 
