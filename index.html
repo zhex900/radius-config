@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Freeradius3 by zhex900</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Freeradius3</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/zhex900/freeradius3" class="btn">View on GitHub</a>
+      <a href="https://github.com/zhex900/freeradius3/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/zhex900/freeradius3/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="draft-this-is-a-working-in-progress" class="anchor" href="#draft-this-is-a-working-in-progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>DRAFT! THIS IS A WORKING IN PROGRESS.</h1>
+
+<h1>
+<a id="an-implementation-of-eap8021x-wireless-network-with-freeradius-version-3" class="anchor" href="#an-implementation-of-eap8021x-wireless-network-with-freeradius-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>An implementation of EAP/802.1x Wireless Network with FreeRADIUS Version 3</h1>
+
+<p>This repository contains all the configuration files for FreeRADIUS v. 3 (FR3). FR3 is use to implement an EAP/802.1x wireless network. FR3 is configured to implement the following features. </p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features:</h2>
+
+<ul>
+<li>Wireless access using EAP authentication. Wireless users log onto the WIFI using username and password. Each user will have a its own profile. This profile contains: mobile number, email, first name, last name etc.<br>
+</li>
+<li>Each user's network traffic will be limited to monthly quota. This includes both uploads and downloads. Once the quota is reached, user will be disconnected from the network. An user can use access the wireless network, when the quota is not reached.</li>
+<li>Reset user's network quota every month.</li>
+<li>Users can be managed via user groups. This means that the same network policy can be applied to a group of users. A network policy could be like, 50 G of quota and reset on 3rd of every month.</li>
+<li>Restrict users to certain network access points.</li>
+<li>Send user data usage warning messages via email and SMS. Once the user reached 50%, 80% or 100% of its quota, a warning message will be sent through both email and SMS.</li>
+</ul>
+
+<p>This is the environment used to implement the wireless network with EAP authentication.  </p>
+
+<h2>
+<a id="environment" class="anchor" href="#environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Environment:</h2>
+
+<ul>
+<li>Email server:  mailgun.</li>
+<li>SMS gateway: <a href="smsgateway.me">smsgateway.me</a>. </li>
+<li>NAS (dynamic ip): Mikrotik.</li>
+<li>Radius server (static ip): FreeRADIUS Version 3 hosted with CoreOS + Docker.</li>
+<li>GUI for user management: <a href="https://github.com/openwisp/OpenWISP-User-Management-System/wiki">OWUMS</a> hosted with CoreOS + Docker.</li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage:</h2>
+
+<p>This are steps to setup a radius server using this configuration. The assumption is you have already succesfully installed a FreeRADIUS. </p>
+
+<p>1 Copy all the files in this repository to <code>/etc/freeradius</code>.
+ 2 Create a new database for your FreeRADIUS server.
+3 Copy over the sample database.  </p>
+
+<p>Alternatively, you can use this <a href="https://hub.docker.com/u/zhex900/">Docker image</a> for this configuration.</p>
+
+<h3>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration:</h3>
+
+<p>This guide is to show you how to configure free radius to implement the above features base upon the above environment. Any things beyond the aforementioned features and environment will be exceeding the scope of this guide. All the necessary configurations files are published here. You only need to change some basic settings to get it working in your environment. This guide is to show you how what these settings are and how to change it.</p>
+
+<p>As a way of self documentation, this guide will also explain how the mentioned features are implemented. To understand how this</p>
+
+<h2>
+<a id="assumption" class="anchor" href="#assumption" aria-hidden="true"><span class="octicon octicon-link"></span></a>Assumption</h2>
+
+<p>Freeradius does not include any graphical interface. It will be nice for users to see their network usage or change their password. Also user administrators need an initiative interface to manage its users. This need is meet by OWUMS. This free radius configuration is designed to work with OWUMS. For the OWUMS setup pleas refer this github. </p>
+
+<p>All the configuration is manually edited. If you want to modify any the features listed above you will need find your own solution. For example, if you want to have the internet quota to count only download traffic, you will need to change the code yourself. </p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/zhex900/freeradius3">Freeradius3</a> is maintained by <a href="https://github.com/zhex900">zhex900</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
