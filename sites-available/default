@@ -385,43 +385,9 @@ authorize {
 #	daily
 
 	# Enforce nas site restriction
-	#update request {
-		#returns the number of the authorised site given the nas ip or nas mac address
-	#	Site := "%{sql:SET @user = '%{User-Name}'; SET @nasmac = '%{request:Called-Station-Id}';  SELECT COUNT(*) FROM (SELECT radsitegroup.nasshortname FROM `radsitegroup` INNER JOIN `radusergroup` ON radsitegroup.groupname=radusergroup.groupname WHERE nasshortname='ALL' AND `radusergroup`.`username` = @user UNION ALL SELECT radsitegroup.nasshortname FROM `radsitegroup` INNER JOIN `radusergroup` ON radsitegroup.groupname=radusergroup.groupname INNER JOIN `nas` ON nas.shortname=radsitegroup.nasshortname WHERE  nas.nasidentifier=@nasmac AND `radusergroup`.`username` = @user) as a}" 
-	#}
+	site-restriction	
 	
-	#No authorised sites are find.
-	#if ( Site == '0' ) {
-	#	update reply { 
-	#              	Reply-Message := "You are not authorised to access this site ('%{Packet-Src-IP-Address}')!" 
-         #     	} 
-         #               reject 
-	#}
-	
-	#
 	# Enforce data quota restriction
-	#if((control:Total-Bytes)){
-	#	update control{ 
-	#		# Get total bytes used since the last reset date.	
-	#		Used-Bytes := "%{sql:SET @reset_date = '%{control:Reset-Date}'; SELECT IFNULL((sum(acctinputoctets)+sum(acctoutputoctets)),0) FROM  `radacct` WHERE UserName='%{request:User-Name}' AND DATE(`acctstarttime`) BETWEEN (CASE WHEN @reset_date > DAYOFMONTH(NOW()) THEN DATE( DATE_SUB( CONCAT( YEAR( NOW( ) ) ,  '-', MONTH( NOW( ) ) ,  '-',  @reset_date ) , INTERVAL 1 MONTH ) ) ELSE CONCAT( YEAR( NOW( ) ) ,  '-', MONTH( NOW( ) ) ,  '-',  @reset_date )END) AND DATE(NOW());}"
-			#Get user's email address
-	#		Email := "%{sql:SELECT  `email` FROM  `users` WHERE  `username` =  '%{request:User-Name}'}"
-
-			#Get user's email marker
-	#		Sent-Mail := "%{sql:SELECT  `sentmail` FROM  `users` WHERE  `username` =  '%{request:User-Name}'}"
-			
-			#Get user's mobile number
-	#		Mobile := "%{sql:SELECT  `mobile_suffix` FROM  `users` WHERE  `username` =  '%{request:User-Name}'}"
-	  
-	 # 	}
-		
-		#Send usage warning emails
-	#	sendmsg
-
-	   	#Now we know how much they are allowed to use and the usage.
-	 	check_usage
-	#}
-	site-restriction
 	data-restriction
 
 	#
