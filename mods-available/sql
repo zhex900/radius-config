@@ -28,7 +28,7 @@ sql {
 	#    * rlm_sql_sqlite
 	#    * rlm_sql_null (log queries to disk)
 	#
-	driver = "rlm_sql_null"
+	driver = "rlm_sql_mysql"
 
 #
 #	Several drivers accept specific options, to set them, a
@@ -223,7 +223,7 @@ sql {
 
 	# Set to 'yes' to read radius clients from the database ('nas' table)
 	# Clients will ONLY be read on server startup.
-	read_clients = yes
+	read_clients = no
 
 	# Table to keep radius client info
 	client_table = "nas"
