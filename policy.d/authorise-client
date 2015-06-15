@@ -1,0 +1,57 @@
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+#
+
+#  Author: Jake He <zhex900@gmail.com>
+#  Date: 15 June 2015
+#
+
+#  This policy checks whether the client (NAS) is authorised to use
+#  this radius service. 
+#
+#  This is a work around where client does not
+#  have static ip address. Therefore client can only be registered 
+#  by its mac-address. To solve this problem, all ips are accepted.
+#  This policy checks whether the client is in the database.
+#
+
+auth-client.mac {
+	#Test to see if our required Called-Station-Id attribute exists
+#        if(&Called-Station-Id){
+        
+		#Test to see if it is in the DB
+                if ("%{sql: select count(*) from nas where nas.nasidentifier='%{request:Called-Station-Id}'}" == 1){
+                	#update control {
+                        	#FreeRADIUS-Client-IP-Address = "%{Packet-Src-IP-Address}"
+                                #FreeRADIUS-Client-Require-MA = no
+                                #FreeRADIUS-Client-Secret = "%{sql: select nas.secret from nas where nas.nasidentifier='%{raw:Called-Station-Id}'}"
+                                #FreeRADIUS-Client-Shortname = "%{sql: select nas.shortname from nas where nas.nasidentifier='%{raw:Called-Station-Id}'}"
+                                #FreeRADIUS-Client-NAS-Type = "%{sql: select nas.type from nas where nas.nasidentifier='%{raw:Called-Station-Id}'}"
+                                        #Optional Virtual server
+                                        #FreeRADIUS-Client-Virtual-Server = "dynamic_server"
+                        #}
+                        
+			ok
+                }
+		else {
+			update reply {
+				Reply-Message := "Unknown client: ('%{request:Called-Station-Id}')!"
+			}
+
+			reject
+
+                }
+#	}
+}
