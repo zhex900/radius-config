@@ -253,8 +253,6 @@ listen {
 #  need to setup hints for the remote radius server
 authorize {
 
-	auth-client.mac
-	
 	#
 	#  Take a User-Name, and perform some checks on it, for spaces and other
 	#  invalid characters.  If the User-Name appears invalid, reject the
