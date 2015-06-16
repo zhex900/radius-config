@@ -1,0 +1,3 @@
+perl sendwarningmail {
+           module = ${confdir}/perl/sendwarningmail.pl
+}
