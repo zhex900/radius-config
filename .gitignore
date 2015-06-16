@@ -2,9 +2,11 @@
 *
 
 # But not these files ...
-|.gitignore
-|LICENSE
-|README.md
-|version.3
-|version.2
-
+!.gitignore
+!version.*
+!version.*/*
+!version.*/*/*
+!version.*/*/*/*
+!version.*/*/*/*/*
+!README.md
+!LICENSE
