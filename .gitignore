@@ -1,1 +1,9 @@
-certs
+# Ignore everything
+*
+
+# But not these files ...
+|.gitignore
+|LICENSE
+|README.md
+|version.3
+
