@@ -42,8 +42,8 @@ my $mobile;
 
 # MySQL database configurations
 my $dsn = "DBI:mysql:database=owums_db;host=mysql;port=3306";
-my $dbusername = "root";
-my $dbpassword = "fheman";
+my $dbusername = "radius";
+my $dbpassword = "radpass";
 
 #testing
 #authorize();
