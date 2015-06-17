@@ -6,7 +6,7 @@ EXPOSE 1813/udp
 
 #install dependencies
 RUN apt-get update && \
-        apt-get -yq install diffstat cron supervisor curl git vim libperl5.18 dpkg-dev libssl-dev ssl-cert libnumber-bytes-human-perl libdbi-perl libdbd-mysql-perl libdatetime-perl && apt-get -y build-dep freeradius && \
+        apt-get -yq install libyubikey0 libtalloc2 diffstat cron supervisor curl git vim libperl5.18 dpkg-dev libssl-dev ssl-cert libnumber-bytes-human-perl libdbi-perl libdbd-mysql-perl libdatetime-perl && apt-get -y build-dep freeradius && \
         git clone https://zhex900@bitbucket.org/zhex900/freeradius3.0.8.git /tmp/freeradius && \
         cd /tmp/freeradius && \
         dpkg -i ./*.deb && \
