@@ -18,7 +18,7 @@ RUN apt-get update && \
         echo "3 * * * * freerad /usr/bin/uniq /tmp/mailgun.queue | /bin/bash && > /tmp/mailgun.queue &> /dev/null" >> /etc/crontab
 
 # copy freeradius config file 
-COPY config_data.pm /etc/freeradius/version.3/mods-config/perl/config_data.pm
+#COPY config_data.pm /etc/freeradius/version.3/mods-config/perl/config_data.pm
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
