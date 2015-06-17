@@ -27,16 +27,16 @@ our @EXPORT = qw ($DB $DB_HOST $DB_PORT $DBUSERNAME $DBPASSWORD email_msg email_
 our $timezone = 'Australia/Perth';
 
 #Email settings
-our $MAILGUN_API ='api:key-12838c7197b4cb35815e4aba7971d017';
+our $MAILGUN_API ='';
 our $MAILGUN_URL ='https://api.mailgun.net/v3/openvessels.org/messages';
-our $SENDER ='wifi admin <wifi@openvessels.org>';
-our $BCC ='jake.he@gmail.com';
+our $SENDER ='';
+our $BCC ='';
 
 #SMS gateway settings
 our $SMS_API='http://smsgateway.me/api/v3/messages/send';
-our $SMSLOGIN='zhex900@gmail.com';
-our $SMSPWD ='fheman'; 
-our $SMSDEVICE ='8969';
+our $SMSLOGIN='';
+our $SMSPWD =''; 
+our $SMSDEVICE ='';
 
 # MySQL database configurations
 our $DB = 'owums_db';
