@@ -22,7 +22,7 @@ use strict;
 use warnings;
 use parent 'Exporter';
 
-our @EXPORT = qw (DSN DBUSERNAME DBPASSWORD email_msg email_subject sms $timezone $MAILGUN_API $MAILGUN_URL $SENDER $BCC $SMS_API $SMSLOGIN $SMSPWD $SMSDEVICE);
+our @EXPORT = qw ($DB $DB_HOST $DB_PORT $DBUSERNAME $DBPASSWORD email_msg email_subject sms $timezone $MAILGUN_API $MAILGUN_URL $SENDER $BCC $SMS_API $SMSLOGIN $SMSPWD $SMSDEVICE);
 
 our $timezone = 'Australia/Perth';
 
@@ -39,9 +39,11 @@ our $SMSPWD ='fheman';
 our $SMSDEVICE ='8969';
 
 # MySQL database configurations
-use constant DSN => "DBI:mysql:database=owums_db;host=mysql;port=3306";
-use constant DBUSERNAME => "root";
-use constant DBPASSWORD => "fheman";
+our $DB = 'owums_db';
+our $DB_HOST = 'mysql';
+our $DB_PORT = '3306';
+our $DBUSERNAME = 'root';
+our $DBPASSWORD = 'fheman';
 
 sub email_msg {
 	my (%arg) = @_;

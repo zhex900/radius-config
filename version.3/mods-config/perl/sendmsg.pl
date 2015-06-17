@@ -138,7 +138,7 @@ sub mailmarker{
     my $range = shift;
     # connect to MySQL database
     my %attr = ( PrintError=>0, RaiseError=>1);
-    my $dbh = DBI->connect(DSN,DBUSERNAME,DBPASSWORD, \%attr);
+    my $dbh = DBI->connect("DBI:mysql:database=".$DB.";host=".$DB_HOST.";port=".$DB_PORT.";",$DBUSERNAME,$DBPASSWORD, \%attr);
     #update statement
     my $sql = "UPDATE `users` SET `sentmail`=$range " . 
 	"WHERE `username`=lower('$user');";
