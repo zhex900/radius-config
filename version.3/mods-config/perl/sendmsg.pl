@@ -1,4 +1,3 @@
-#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
@@ -19,54 +18,47 @@
 #! usr/bin/perl 
 
 #use strict;
-# use ...
-# This is very important!
+use warnings;
+use Number::Bytes::Human qw(format_bytes);
+use POSIX qw(ceil);
+use DBI;
+use DateTime;
+use config_data;
+
 use vars qw(%RAD_CHECK %RAD_REPLY %RAD_REQUEST);
 use constant RLM_MODULE_OK=>2;
 use constant RLM_MODULE_UPDATED=>8;
 use constant RLM_MODULE_REJECT=>0;
 use constant RLM_MODULE_NOOP=>7;
-use Number::Bytes::Human qw(format_bytes);
-#use MIME::Lite;
-use POSIX qw(ceil);
-use DBI;
-use DateTime;
+use constant TESTMODE => "test";
 
-my $MAILGUN_API = 'api:key-12838c7197b4cb35815e4aba7971d017';
-my $MAILGUN_URL = 'https://api.mailgun.net/v3/openvessels.org/messages';
-my $SENDER = 'wifi admin <wifi@openvessels.org>';
-my $BCC = 'jake.he@gmail.com';
-
+# Declare all the variables
 my @warnings = (0,50,80,100);
 my $used_pct = 0;
-my $email;
-my $user;
-my $sentmail;
-#my $reset_date;
-my $used_data;
-my $total_data;
-my $mobile;
+my ($email, $user, $sentmail, $reset_date, $used_data, $total_data, $mobile, $i, $n);
+$i=$n=0;
 
-#testing
-#use constant USED=>15999999997;
-#use constant TOTAL=>19590999997;
-#my $used_pct     = ceil(USED/TOTAL*100);
-#my $email = 'jake.he@gmail.com';
-#my $user = ucfirst('bob');
-#my $sentmail = 50;
-#my $reset_date = nextresetdate(2);
-#my $used_data = format_bytes(USED); 
-#my $total_data = format_bytes(TOTAL); 
+#testing mode
+if ($ARGV[0] eq TESTMODE){
+	use constant USED=>15999999997;
+	use constant TOTAL=>19590999997;
+	$used_pct     = ceil(USED/TOTAL*100);
+	$email = 'jake.he@gmail.com';
+	$user = ucfirst('bob');
+	$sentmail = 50;
+	$reset_date = nextresetdate(2);
+	$used_data = format_bytes(USED); 
+	$total_data = format_bytes(TOTAL); 
+ 	$mobile = '0433169143';
+	
+	print "###### Enable test mode! ######\n\n";
+	email_warning();
+	system ("cat /tmp/mailgun.queue");
+}
 
-# MySQL database configurations
-my $dsn = "DBI:mysql:database=owums_db;host=mysql;port=3306";
-my $dbusername = "root";
-my $dbpassword = "fheman";
-
-#testing
-#authorize();
-#mysendmail();
-
+# 
+# This is called by the radius. 
+#
 sub authorize {
 
     $used_pct 
@@ -75,20 +67,20 @@ sub authorize {
     $user = ucfirst($RAD_REQUEST{'User-Name'});
     $sentmail = $RAD_CHECK{'Sent-Mail'};
     $mobile = $RAD_CHECK{'Mobile'};  
-    #$reset_date = nextresetdate($RAD_CHECK{'Reset-Date'});
     $used_data = format_bytes($RAD_CHECK{'Used-Bytes'}, precision => 2);
     $total_data = format_bytes($RAD_CHECK{'Total-Bytes'}, precision => 2);
+    $reset_date = nextresetdate($RAD_CHECK{'Reset-Date'}); #->add(days => 1);
 
     #Send warning emails 
     email_warning();
-   # $RAD_CHECK{'Email'}=$used_pct;
+
     return RLM_MODULE_NOOP;
 }
 
 sub email_warning{
     #initial value
-    local $range = -1;
-    local @w = @warnings;
+    my $range = -1;
+    my @w = @warnings;
 
     #find the range of the current usage.
     for($i=0;$i<@w;++$i) {
@@ -141,11 +133,12 @@ sub email_warning{
 #range of 80%, sentmail's value will be 80.
 #
 sub mailmarker{
+
     #get first parameter
     my $range = shift;
     # connect to MySQL database
     my %attr = ( PrintError=>0, RaiseError=>1);
-    my $dbh = DBI->connect($dsn,$dbusername,$dbpassword, \%attr);
+    my $dbh = DBI->connect(DSN,DBUSERNAME,DBPASSWORD, \%attr);
     #update statement
     my $sql = "UPDATE `users` SET `sentmail`=$range " . 
 	"WHERE `username`=lower('$user');";
@@ -155,39 +148,30 @@ sub mailmarker{
 
 #send warning mail
 sub mysendmail{
-    #work out the number of days until the next reset
-    
-    my $today = DateTime->now()->set_time_zone('Australia/Perth');
-    my $reset_date = nextresetdate($RAD_CHECK{'Reset-Date'}); #->add(days => 1);
+ 
+    #work out the number of days until the next reset  
+    my $today = DateTime->now()->set_time_zone('Australia/Perth');#$timezone);
     my $remaining = $today->delta_days($reset_date)->in_units('days');
-    $reset_date = $reset_date->dmy;
-    my $msg = qq{ Hello $user, <P>This is just a friendly note to let you know that you\'ve used <b>$used_data ($used_pct%)</b> of your monthly quota of $total_data. You quota resets in <b>$remaining day(s)</b>, on: <b>$reset_date</b>. <P>To check your current usage please go to <a href="http://wifi.churchinperth.org">accounts</a>. <P>Much grace to you! <P>Jake He };
+    my $reset_date = $reset_date->dmy;
 
-    local $subject = "$used_pct% Internet Quota Used! Resets on $reset_date.";
-    
-    my $TXT=qq{Hello $user,
-    
-    This is just a friendly note to let you know that you have used $used_data ($used_pct%)of your monthly quota of $total_data.
-    
-    You quota resets in $remaining day(s), on: $reset_date.
-    
-    Much Grace to you!
-    
-    Jake He};                                                                                               
-    my $SMS= 'http://smsgateway.me/api/v3/messages/send';                                           
-    my $SMSLOGIN='zhex900@gmail.com';                                                               
-    my $SMSPWD = 'fheman';                                                                          
-    my $SMSDEVICE = '8969';   
-        
-   	open(my $fh, '>>', '/tmp/mailgun.queue');
-	print $fh "curl -s --user \'$MAILGUN_API\' $MAILGUN_URL -F from=\'$SENDER\' -F to=$email -F bcc=$BCC -F subject=\'$subject\' -F html=\"$msg\""; 
-    print $fh "curl -s \'$SMS\' -F email=\'$SMSLOGIN\' -F password=\'$SMSPWD\' -F device=\'$SMSDEVICE\' -F number=$mobile -F message=\"$TXT\"\n";
+    my %arg = ('user'=>$user, 'used_data'=>$used_data, 'used_pct'=>$used_pct, 'reset_date'=>$reset_date, 'total_data'=>$total_data, 'remaining'=>$remaining);
+    my $subject = email_subject(%arg); 
+    my $msg = email_msg(%arg);
+    my $sms = sms(%arg);
    
-	close $fh;
+    open(my $fh, '>>', '/tmp/mailgun.queue');
+ 
+    # set the email in the queue file.   
+    print $fh "curl -s --user \'$MAILGUN_API\' $MAILGUN_URL -F from=\'$SENDER\' -F to=$email -F bcc=$BCC -F subject=\'$subject\' -F html=\"$msg\"\n"; 
+    # set the sms in the queue file.
+    print $fh "curl -s \'$SMS_API\' -F email=\'$SMSLOGIN\' -F password=\'$SMSPWD\' -F device=\'$SMSDEVICE\' -F number=$mobile -F message=\"$sms\"\n";
+   
+    close $fh;
 }
 
 #helper function
 sub add{
+    my $m=0;
     ($i, $m) = @_;
     if ($i==$m-1){
 	return $i;
@@ -209,7 +193,6 @@ sub divide{
 
 #give a date find the next month.
 sub nextresetdate{
-
     my $reset_date = $_[0];
     # current date                                                              
     my $today = DateTime->now(time_zone=>'local');
