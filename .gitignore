@@ -8,5 +8,6 @@
 !version.*/*/*
 !version.*/*/*/*
 !version.*/*/*/*/*
+!db/*
 !README.md
 !LICENSE
