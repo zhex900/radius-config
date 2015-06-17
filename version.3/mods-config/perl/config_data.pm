@@ -42,8 +42,8 @@ our $SMSDEVICE ='8969';
 our $DB = 'owums_db';
 our $DB_HOST = 'mysql';
 our $DB_PORT = '3306';
-our $DBUSERNAME = 'root';
-our $DBPASSWORD = 'fheman';
+our $DBUSERNAME = 'radius';
+our $DBPASSWORD = 'radpass';
 
 sub email_msg {
 	my (%arg) = @_;
