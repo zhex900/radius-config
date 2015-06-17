@@ -48,7 +48,16 @@ our $DBPASSWORD = 'fheman';
 sub email_msg {
 	my (%arg) = @_;
 	
-	return qq{Hello $arg{user}, <P>This is just a friendly note to let you know that you\'ve used <b>$arg{used_data} ($arg{used_pct}%)</b> of your monthly quota of $arg{total_data}. You quota resets in <b>$arg{remaining} day(s)</b>, on: <b>$arg{reset_date}</b>. <P>To check your current usage please go to <a href="http://wifi.churchinperth.org">accounts</a>. <P>Much grace to you! <P>Jake He };
+	return qq{
+Hello $arg{user}, 
+<P>
+This is just a friendly note to let you know that you\'ve used <b>$arg{used_data} ($arg{used_pct}%)</b> of your monthly quota of $arg{total_data}. You quota resets in <b>$arg{remaining} day(s)</b>, on: <b>$arg{reset_date}</b>. 
+<P>
+To check your current usage please go to <a href="http://wifi.churchinperth.org">accounts</a>. 
+<P>
+Much grace to you! 
+<P>
+Jake He };
 }
 
 sub email_subject {
@@ -61,14 +70,14 @@ sub sms {
 	my (%arg) = @_;
     
 	return qq{Hello $arg{user},
+
+This is just a friendly note to let you know that you have used $arg{used_data} ($arg{used_pct}%) of your monthly quota of $arg{total_data}.
     
-	This is just a friendly note to let you know that you have used $arg{used_data} ($arg{used_pct}%) of your monthly quota of $arg{total_data}.
+You quota resets in $arg{remaining} day(s), on: $arg{reset_date}.
     
-	You quota resets in $arg{remaining} day(s), on: $arg{reset_date}.
+Much Grace to you!
     
-	Much Grace to you!
-    
-	Jake He}; 
+Jake He}; 
 }
 
 1;
