@@ -18,6 +18,11 @@ This is the environment used to implement the wireless network with EAP authenti
 * Radius server (static ip): FreeRADIUS Version 3 hosted with CoreOS + Docker.
 * GUI for user management: [OWUMS](https://github.com/openwisp/OpenWISP-User-Management-System/wiki) hosted with CoreOS + Docker.
 
+##Prerequist:
+*Cron.
+*Curl
+*Perl
+
 ##Configuration:
 To use this implementation two sets configuration data needs to be correctly completed. 
 
@@ -27,8 +32,13 @@ All the radius data is store in the mysql database.
 ###Email and SMS:
 config_data.pm
 
+###Cron job:
 
+##Docker 
 
+##Build Docker image
+
+##Run Docker image
 
 
 This guide is to show you how to configure free radius to implement the above features base upon the above environment. Any things beyond the aforementioned features and environment will be exceeding the scope of this guide. All the necessary configurations files are published here. You only need to change some basic settings to get it working in your environment. This guide is to show you how what these settings are and how to change it.
