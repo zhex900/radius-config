@@ -68,7 +68,6 @@ Table: `radius_checks`
 check_attribute	| op	| value	| radius_entity_id |	
 ----------------|-----|-------|------------------|
 Reset-Date      |	:=	| 3	    | 5	               |
-----------------|-----|-------|------------------|
 Total-Bytes	    | :=	|16106127360 |	5          |	
 
 ###Email and SMS:
