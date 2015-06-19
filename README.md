@@ -30,6 +30,7 @@ To use this implementation a sets of configuration data needs to be correctly en
 
 ###Wireless Users:
 *Table: `users`*
+An user must belong to at least one user group. 
 
 id | email       | crypted_password | active | given_name | surname | username| mobile_suffix|sentmail|
 ---|-------------| -----------------|--------|------------|---------|---------|--------------|--------|
