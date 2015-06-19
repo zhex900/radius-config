@@ -61,6 +61,15 @@ headoffice | headoffice	| mikrotik |radius	| 02-0C-42-B7-A9-5E:GRACE UPON GRACE|
 *  `nasidentifier` the mac-address and SSID. Note the format. 
 
 ###Network policy:
+This is to set the traffic quota and reset date. 
+
+Table: `radius_checks`
+
+check_attribute	| op	| value	| radius_entity_id |	
+----------------|-----|-------|------------------|
+Reset-Date      |	:=	| 3	    | 5	               |
+----------------|-----|-------|------------------|
+Total-Bytes	    | :=	|16106127360 |	5          |	
 
 ###Email and SMS:
 config_data.pm
