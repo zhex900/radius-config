@@ -70,6 +70,26 @@ check_attribute	| op	| value	| radius_entity_id |
 Reset-Date      |	:=	| 3	    | 5	               |
 Total-Bytes	    | :=	|16106127360 |	5          |	
 
+* `check_attribute` can be either `Reset-Date` or `Total-Bytes`.
+* `Reset-Date` is the reset date of the month. It must be between 1-26.
+* `Total-Bytes` is the total network quota in bytes (upload and download).
+* `op` must be `:=`.
+* `radius_entity_id` is the `radius_groups.id` of a group. For this example, it is group `staff`.
+* `value` this is the value of the `check_attribute`.
+
+Table: `radius_replies`
+
+This radius implementation does send `Mikrotik-Total-Limit` and `Mikrotik-Total-Limit-Gigawords`in the reply attribute. These attributes should terminate the session when quota is reached. However Mikrotik NAS does not behave this way. I do not know why. To work around this problem, each session will be forced to reconnect after a period of time (1 hour). When an user reconnects, radius server will check the network usage and enforce the network policy. 
+
+reply_attribute | op	| value	| radius_entity_id |	
+----------------|-----|-------|------------------|
+Session-Timeout	|:=	  | 10800 | 5                |
+
+* `reply_attribute` can only be `Session-Timeout`.
+* `radius_entity_id` is the `radius_groups.id` of a group. For this example, it is group `staff`.
+* `value` this is the value of the `reply_attribute`.
+* `Session-Timeout` this is the time limit of each session. The value is in seconds. 
+
 ###Email and SMS:
 config_data.pm
 
