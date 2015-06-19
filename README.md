@@ -29,7 +29,7 @@ This is the environment used to implement the wireless network with EAP authenti
 To use this implementation a sets of configuration data needs to be correctly entered. 
 
 ###Wireless Users:
-*Table: `users`*
+**Table: `users`**
 
 id | email       | crypted_password | active | given_name | surname | username| mobile_suffix|sentmail|
 ---|-------------| -----------------|--------|------------|---------|---------|--------------|--------|
