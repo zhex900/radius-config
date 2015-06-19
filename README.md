@@ -36,9 +36,10 @@ id | email       | crypted_password | active | given_name | surname | username| 
 10 | bob@mail.com| 7KU14qfW         | 1      | Bob        | Jones   | bob     | 0413129133   | 0      |
 
 Table: `radius_groups`
-id |name | 
----|-----|
-5  |staff|
+
+id | name | 
+---|------|
+5  | staff|
 
 Table: `radius_groups_users`
 
