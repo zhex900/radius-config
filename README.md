@@ -50,6 +50,16 @@ user_id	| radius_group_id|
 ###Network Information:
 Table: `nas`
 
+nasname	   | shortname	| type	   | secret |	nasidentifier	                    |
+-----------|------------|----------|--------|-----------------------------------|
+headoffice | headoffice	| mikrotik |radius	| 02-0C-42-B7-A9-5E:GRACE UPON GRACE|
+
+* `nasname` is a description of the NAS.
+* `shortname` shoudl be unique to identify the NAS.
+*  `type` the type of the NAS.
+*  `secret` radius server secret.
+*  `nasidentifier` the mac-address and SSID. Note the format. 
+
 ###Network policy:
 
 ###Email and SMS:
