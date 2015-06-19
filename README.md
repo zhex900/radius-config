@@ -10,24 +10,34 @@ This is a FreeRADIUS configuration used to implement an EAP/802.1x wireless netw
 * Restrict users to certain network access points. For example, the user group students can only have access to the NAS located in the science block. 
 * Send user data usage warning messages via email and SMS. Once the user reached 50%, 80% or 100% of its quota, a warning message will be sent through both email and SMS.
 
-This is the environment used to implement the wireless network with EAP authentication.  
 ##Environment: 
+This is the environment used to implement the wireless network with EAP authentication. 
 * Email server:  mailgun.
 * SMS gateway: [smsgateway.me](smsgateway.me). 
 * NAS (dynamic ip): Mikrotik.
 * Radius server (static ip): FreeRADIUS Version 3 hosted with CoreOS + Docker.
 * GUI for user management: [OWUMS](https://github.com/openwisp/OpenWISP-User-Management-System/wiki) hosted with CoreOS + Docker.
 
-##Prerequist:
-*Cron.
-*Curl
-*Perl
+##Requirements:
+* Debian baseed linux distros
+* FreeRADIUS Version 2 or Version 3
+* Cron
+* Curl
+* Perl
 
 ##Configuration:
-To use this implementation two sets configuration data needs to be correctly completed. 
+To use this implementation a sets of configuration data needs to be correctly entered. 
 
-###Radius Data:
-All the radius data is store in the mysql database. 
+###Wireless Users:
+Table: `users`
+
+email              | crypted_password | active | given_name | surname | username| mobile_suffix|sentmail|
+-------------------| -----------------|--------|------------|---------|---------|--------------|--------|
+example@gmail.com  | 7KU14qfW         | 1      | Bob        | Jones   | bob     | 0413129133   | 0      |
+
+###Network Information:
+
+###Network policy:
 
 ###Email and SMS:
 config_data.pm
