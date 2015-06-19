@@ -26,7 +26,7 @@ This is the environment used to implement the wireless network with EAP authenti
 * Perl
 
 ##Configuration:
-To use this implementation a sets of configuration data needs to be correctly entered. 
+To use this implementation a sets of configuration data needs to be correctly entered. The mysql sample configuration are at `radius-configdb/owums_sample.sql`. This sql schema can be use for both version 3 and 2. Email and SMS configuration are at `radius-config/version.3/mods-config/perl/config_data.pm`. In version 2, Email and SMS configuration are hard coded in `radius-config/version.2/perl/sendwarningmail.pl`.
 
 ###Wireless Users:
 *Table: `users`*
@@ -100,7 +100,7 @@ staff     | headoffice   |
 * `nasshortname` must be an existing nas in `nas.shortname` or it can have the value `ALL`. `ALL` will grant access to all NAS in the `nas` table. 
 
 ###Email and SMS:
-config_data.pm
+This is the email and sms configuration for version 3. This information is at `radius-config/version.3/mods-config/perl/config_data.pm`.
 
 ###Cron job:
 
