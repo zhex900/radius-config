@@ -29,7 +29,7 @@ This is the environment used to implement the wireless network with EAP authenti
 To use this implementation a sets of configuration data needs to be correctly entered. 
 
 ###Wireless Users:
-Table: `users`
+*Table: `users`*
 
 id | email       | crypted_password | active | given_name | surname | username| mobile_suffix|sentmail|
 ---|-------------| -----------------|--------|------------|---------|---------|--------------|--------|
@@ -61,9 +61,9 @@ headoffice | headoffice	| mikrotik |radius	| 02-0C-42-B7-A9-5E:GRACE UPON GRACE|
 *  `nasidentifier` the mac-address and SSID. Note the format. 
 
 ###Network policy:
-This is to set the traffic quota and reset date. 
 
 Table: `radius_checks`
+This is to set the traffic quota and reset date. 
 
 check_attribute	| op	| value	| radius_entity_id |	
 ----------------|-----|-------|------------------|
@@ -89,6 +89,8 @@ Session-Timeout	|:=	  | 10800 | 5                |
 * `radius_entity_id` is the `radius_groups.id` of a group. For this example, it is group `staff`.
 * `value` this is the value of the `reply_attribute`.
 * `Session-Timeout` this is the time limit of each session. The value is in seconds. 
+
+*Table: `radsitegroup`*
 
 ###Email and SMS:
 config_data.pm
