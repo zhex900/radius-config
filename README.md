@@ -29,13 +29,13 @@ This is the environment used to implement the wireless network with EAP authenti
 To use this implementation a sets of configuration data needs to be correctly entered. 
 
 ###Wireless Users:
-**Table: `users`**
+*Table: `users`*
 
 id | email       | crypted_password | active | given_name | surname | username| mobile_suffix|sentmail|
 ---|-------------| -----------------|--------|------------|---------|---------|--------------|--------|
 10 | bob@mail.com| 7KU14qfW         | 1      | Bob        | Jones   | bob     | 0413129133   | 0      |
 
-Table: `radius_groups`
+*Table: `radius_groups`*
 
 id | name | 
 ---|------|
@@ -48,7 +48,7 @@ user_id	| radius_group_id|
 10      | 5              |
 
 ###Network Information:
-Table: `nas`
+*Table: `nas`*
 
 nasname	   | shortname	| type	   | secret |	nasidentifier	                    |
 -----------|------------|----------|--------|-----------------------------------|
@@ -61,8 +61,7 @@ headoffice | headoffice	| mikrotik |radius	| 02-0C-42-B7-A9-5E:GRACE UPON GRACE|
 *  `nasidentifier` the mac-address and SSID. Note the format. 
 
 ###Network policy:
-
-Table: `radius_checks`
+*Table: `radius_checks`*
 This is to set the traffic quota and reset date. 
 
 check_attribute	| op	| value	| radius_entity_id |	
@@ -77,7 +76,7 @@ Total-Bytes	    | :=	|16106127360 |	5          |
 * `radius_entity_id` is the `radius_groups.id` of a group. For this example, it is group `staff`.
 * `value` this is the value of the `check_attribute`.
 
-Table: `radius_replies`
+*Table: `radius_replies`*
 
 This radius implementation does send `Mikrotik-Total-Limit` and `Mikrotik-Total-Limit-Gigawords`in the reply attribute. These attributes should terminate the session when quota is reached. However Mikrotik NAS does not behave this way. I do not know why. To work around this problem, each session will be forced to reconnect after a period of time (1 hour). When an user reconnects, radius server will check the network usage and enforce the network policy. 
 
@@ -91,6 +90,14 @@ Session-Timeout	|:=	  | 10800 | 5                |
 * `Session-Timeout` this is the time limit of each session. The value is in seconds. 
 
 *Table: `radsitegroup`*
+This grant user group access to NAS. In this example, user group `staff` have access to NAS `headoffice`.
+
+groupname | nasshortname |
+----------|--------------|
+staff     | headoffice   |
+
+* `groupname` must be an existing group name in `radius_groups.name`.
+* `nasshortname` must be an existing nas in `nas.shortname` or it can have the value `ALL`. `ALL` will grant access to all NAS in the `nas` table. 
 
 ###Email and SMS:
 config_data.pm
