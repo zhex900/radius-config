@@ -31,19 +31,19 @@ To use this implementation a sets of configuration data needs to be correctly en
 ###Wireless Users:
 Table: `users`
 
-id|email       | crypted_password | active | given_name | surname | username| mobile_suffix|sentmail|
---|------------| -----------------|--------|------------|---------|---------|--------------|--------|
-10|bob@mail.com| 7KU14qfW         | 1      | Bob        | Jones   | bob     | 0413129133   | 0      |
+id | email       | crypted_password | active | given_name | surname | username| mobile_suffix|sentmail|
+---|-------------| -----------------|--------|------------|---------|---------|--------------|--------|
+10 | bob@mail.com| 7KU14qfW         | 1      | Bob        | Jones   | bob     | 0413129133   | 0      |
 
 Table: `radius_groups`
 id |name | 
----|------
+---|-----|
 5  |staff|
 
 Table: `radius_groups_users`
 
 user_id	| radius_group_id|
--------------------------|
+--------|----------------|
 10      | 5              |
 
 ###Network Information:
