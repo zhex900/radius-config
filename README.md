@@ -135,15 +135,15 @@ This is the email and sms configuration for version 3. This information is at `r
 
 1. Download the Dockerfile
 
-`curl -O https://raw.githubusercontent.com/zhex900/radius-config/master/version.3/Dockerfile`
+   `curl -O https://raw.githubusercontent.com/zhex900/radius-config/master/version.3/Dockerfile`
 
 2. Download the supervisord.conf.
 
-`curl -O https://raw.githubusercontent.com/zhex900/radius-config/master/version.3/supervisord.conf`
+   `curl -O https://raw.githubusercontent.com/zhex900/radius-config/master/version.3/supervisord.conf`
 
 3. Build image.
 
-`docker build -t zhex900/freeradius3 .`
+   `docker build -t zhex900/freeradius3 .`
 
 ##Run the Docker image
 
