@@ -177,6 +177,7 @@ mysql> CREATE DATABASE owums_db;
 mysql> create user 'radius'@'localhost' IDENTIFIED BY 'radpass';
 mysql> grant ALL PRIVILEGES on owums_db.* to 'radius@localhost';    
 mysql> exit;
+% wget https://raw.github.com/zhex900/radius-config/master/db/owums_sample.sql
 % mysql -u root -ppassword -h mysql owums_db < /etc/freeradius/db/owums_db_default.sql
 ````
 * Create new radius user
