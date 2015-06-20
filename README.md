@@ -150,11 +150,19 @@ This is the email and sms configuration for version 3. This information is at `r
 `docker run -d --name freeradius3 --link mysql-service:mysql -p 1812:1812/udp -p 1813:1813/udp zhex900/freeradius3`
 
 ##Setup
-To make changes to the radius database settings and `config_data.pm`, you will need to get into the docker container. This is how you do it. 
+To make changes to the radius database settings and `config_data.pm`, you will need to get into the docker container. This is how you get into the container. Once you are in, all the freeradius configuration files are in `/etc/freeradius`. You can make changes as needed. 
 
 `docker exec -it freeradius3 bash`
 
-After you made the changes, you can type `exit` to get out of the container. 
+After you made the changes. You will need to restart the freeradius server. For this container freeradius is managed by `supervisord`.
+
+Run `supervisorctl`
+
+`supervisor> restart freeradius`
+
+`supervisor> exit`
+
+You can type `exit` to get out of the container. 
 
 To save your changes to your image. 
 
