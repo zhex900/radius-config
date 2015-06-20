@@ -171,7 +171,14 @@ To save your changes to your image.
 `docker commit -m "updated mysql config and config_data.pm" freeradius3 zhex900/freeradius3`
 
 ###Setup database
-
+````
+% mysql -u root -ppassword -h mysql
+mysql> CREATE DATABASE owums_db;
+mysql> create user 'radius'@'localhost' IDENTIFIED BY 'radpass';
+mysql> grant ALL PRIVILEGES on owums_db.* to 'radius@localhost';    
+mysql> exit;
+% mysql -u root -ppassword -h mysql owums_db < /etc/freeradius/db/owums_db_default.sql
+````
 * Create new radius user
 * Create `owums_db` databse
 * Copy the default database
