@@ -150,6 +150,8 @@ This is the email and sms configuration for version 3. This information is at `r
 `docker run -d --name freeradius3 --link mysql-service:mysql -p 1812:1812/udp -p 1813:1813/udp zhex900/freeradius3`
 
 ##Setup
+
+###Change configuration from default
 To make changes to the radius database settings and `config_data.pm`, you will need to get into the docker container. This is how you get into the container. Once you are in, all the freeradius configuration files are in `/etc/freeradius`. You can make changes as needed. 
 
 `docker exec -it freeradius3 bash`
@@ -167,6 +169,13 @@ You can type `exit` to get out of the container.
 To save your changes to your image. 
 
 `docker commit -m "updated mysql config and config_data.pm" freeradius3 zhex900/freeradius3`
+
+###Setup database
+
+* Create new radius user
+* Create `owums_db` databse
+* Copy the default database
+
 
 This guide is to show you how to configure free radius to implement the above features base upon the above environment. Any things beyond the aforementioned features and environment will be exceeding the scope of this guide. All the necessary configurations files are published here. You only need to change some basic settings to get it working in your environment. This guide is to show you how what these settings are and how to change it.
 
