@@ -131,7 +131,7 @@ This is the email and sms configuration for version 3. This information is at `r
 
 ##Build Docker image
 
-* Version3:* 
+*Version3:* 
 
 1. Download the Dockerfile
 
