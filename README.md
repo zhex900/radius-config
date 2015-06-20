@@ -32,22 +32,23 @@ This is the default values.
 
 *Version 3: `radius-config/version.3/mods-available/sql`*
 ```
-driver = "rlm_sql_mysql"
+    driver = "rlm_sql_mysql"
     server = "mysql"
     port = 3306
     login = "radius"
     password = "radpass"
     radius_db = "owums_db"
-    ```
+```
 
-*Version 2: radius-config/version.2/sql.conf`*
+*Version 2: `radius-config/version.2/sql.conf`*
+
 ```
     database = "owums_db"
     server = "mysql"
     port = 3306
     login = "radius"
     password = "radpass"
-    ```
+```
     
 ###Wireless Users:
 *Table: `users`*
