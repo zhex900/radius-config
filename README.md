@@ -31,7 +31,7 @@ To use this implementation a sets of configuration data needs to be correctly en
 This is the default values.
 
 *Version 3: `radius-config/version.3/mods-available/sql`*
-    driver = "rlm_sql_mysql"
+     driver = "rlm_sql_mysql"
     server = "mysql"
     port = 3306
     login = "radius"
