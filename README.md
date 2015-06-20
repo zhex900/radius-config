@@ -28,7 +28,7 @@ This is the environment used to implement the wireless network with EAP authenti
 ##Configuration:
 To use this implementation a sets of configuration data needs to be correctly entered. The mysql sample configuration are at `radius-configdb/owums_sample.sql`. This sql schema can be use for both version 3 and 2. Email and SMS configuration are at `radius-config/version.3/mods-config/perl/config_data.pm`. In version 2, Email and SMS configuration are hard coded in `radius-config/version.2/perl/sendwarningmail.pl`.
 ###Radius Database:
-This is the default values.
+These are the default values.
 
 *Version 3: `radius-config/version.3/mods-available/sql`*
 ```
