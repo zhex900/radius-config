@@ -135,11 +135,11 @@ This is the email and sms configuration for version 3. This information is at `r
 
 1. Download the Dockerfile
 
-   `curl -O https://raw.githubusercontent.com/zhex900/radius-config/master/version.3/Dockerfile`
+   `bash$ curl -O https://raw.githubusercontent.com/zhex900/radius-config/master/version.3/Dockerfile`
 
 2. Download the supervisord.conf.
 
-   `curl -O https://raw.githubusercontent.com/zhex900/radius-config/master/version.3/supervisord.conf`
+   `bash$ curl -O https://raw.githubusercontent.com/zhex900/radius-config/master/version.3/supervisord.conf`
 
 3. Build image.
 
@@ -147,18 +147,20 @@ This is the email and sms configuration for version 3. This information is at `r
 
 ##Run the Docker image
 
-`docker run -d --name freeradius3 --link mysql-service:mysql -p 1812:1812/udp -p 1813:1813/udp zhex900/freeradius3`
+`bash$ docker run -d --name freeradius3 --link mysql-service:mysql -p 1812:1812/udp -p 1813:1813/udp zhex900/freeradius3`
 
-##Setup
+This image is 334.4 MB.
+
+##Initial Setup
 
 ###Change configuration from default
 To make changes to the radius database settings and `config_data.pm`, you will need to get into the docker container. This is how you get into the container. Once you are in, all the freeradius configuration files are in `/etc/freeradius`. You can make changes as needed. 
 
-`docker exec -it freeradius3 bash`
+`bash$ docker exec -it freeradius3 bash`
 
 After you made the changes. You will need to restart the freeradius server. For this container freeradius is managed by `supervisord`.
 
-Run `supervisorctl`
+`bash$ supervisorctl`
 
 `supervisor> restart freeradius`
 
@@ -168,31 +170,19 @@ You can type `exit` to get out of the container.
 
 To save your changes to your image. 
 
-`docker commit -m "updated mysql config and config_data.pm" freeradius3 zhex900/freeradius3`
+`bash$ docker commit -m "updated mysql config and config_data.pm" freeradius3 zhex900/freeradius3`
 
 ###Setup database
 ````
-% mysql -u root -ppassword -h mysql
+bash$  mysql -u root -ppassword -h mysql
 mysql> CREATE DATABASE owums_db;
 mysql> create user 'radius'@'%' IDENTIFIED BY 'radpass';
 mysql> grant ALL PRIVILEGES on owums_db.* to 'radius'@'%';    
 mysql> exit;
-% wget https://raw.github.com/zhex900/radius-config/master/db/owums_sample.sql
-% mysql -u radius -pradpass -h mysql owums_db < /etc/freeradius/db/owums_db_default.sql
+bash$  wget https://raw.github.com/zhex900/radius-config/master/db/owums_sample.sql
+bash$  mysql -u radius -pradpass -h mysql owums_db < /etc/freeradius/db/owums_db_default.sql
 ````
+This does the following three things.
 * Create new radius user
 * Create `owums_db` databse
 * Copy the default database
-
-
-This guide is to show you how to configure free radius to implement the above features base upon the above environment. Any things beyond the aforementioned features and environment will be exceeding the scope of this guide. All the necessary configurations files are published here. You only need to change some basic settings to get it working in your environment. This guide is to show you how what these settings are and how to change it.
-
-As a way of self documentation, this guide will also explain how the mentioned features are implemented. To understand how this
-
-##Assumption
-
-
-Freeradius does not include any graphical interface. It will be nice for users to see their network usage or change their password. Also user administrators need an initiative interface to manage its users. This need is meet by OWUMS. This free radius configuration is designed to work with OWUMS. For the OWUMS setup pleas refer this github. 
-
-All the configuration is manually edited. If you want to modify any the features listed above you will need find your own solution. For example, if you want to have the internet quota to count only download traffic, you will need to change the code yourself. 
-
