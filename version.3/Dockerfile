@@ -22,4 +22,4 @@ RUN apt-get update && \
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-CMD /etc/init.d/cron start && /etc/init.d/supervisor start
+CMD /etc/init.d/supervisor start
