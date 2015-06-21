@@ -23,6 +23,7 @@ use Number::Bytes::Human qw(format_bytes);
 use POSIX qw(ceil);
 use DBI;
 use DateTime;
+use lib '/etc/freeradius/mods-config/perl/';
 use config_data;
 
 use vars qw(%RAD_CHECK %RAD_REPLY %RAD_REQUEST);
