@@ -5,7 +5,7 @@ while :
 do
         # run clean up
         echo "Run clean up at: " `date`
-        perl ./clean_up.pl
+        perl /etc/freeradius/mods-config/perl/clean_up.pl
 
         # schedule for the next run.
         startTime=$(date +%s)
