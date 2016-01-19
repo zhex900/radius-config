@@ -145,6 +145,20 @@ This is the email and sms configuration for version 3. This information is at `r
 
    `docker build -t zhex900/freeradius3 .`
 
+##Automatic Build for Docker Image
+
+1. Download the radius-config
+
+   `bash$ git clone https://github.com/zhex900/radius-config.git`
+   
+2. Go to the Docker folder
+
+   `bash$ cd radius-config/version.3/Docker`
+   
+3. Build image. This will take a long time. 
+
+   `bash$ sh make.sh`
+
 ##Run the Docker image
 
 `bash$ docker run -d --name freeradius3 --link mysql-service:mysql -p 1812:1812/udp -p 1813:1813/udp zhex900/freeradius3`
