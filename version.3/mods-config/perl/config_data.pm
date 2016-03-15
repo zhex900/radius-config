@@ -27,9 +27,9 @@ our @EXPORT = qw ($DB $DB_HOST $DB_PORT $DBUSERNAME $DBPASSWORD email_msg email_
 our $timezone = 'Australia/Perth';
 
 #Email settings
-our $MAILGUN_API ='';
+our $MAILGUN_API ='api:key-1080f9e989586356c3423585c3a59366';
 our $MAILGUN_URL ='https://api.mailgun.net/v3/churchinperth.org/messages';
-our $SENDER ='no-reply@churchinperth.org';
+our $SENDER ='wifi admin <no-reply@churchinperth.org>';
 our $BCC ='wendygoh123@yahoo.com';
 
 #SMS gateway settings
