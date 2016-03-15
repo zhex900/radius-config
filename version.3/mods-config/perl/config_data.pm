@@ -28,9 +28,9 @@ our $timezone = 'Australia/Perth';
 
 #Email settings
 our $MAILGUN_API ='';
-our $MAILGUN_URL ='https://api.mailgun.net/v3/openvessels.org/messages';
-our $SENDER ='';
-our $BCC ='';
+our $MAILGUN_URL ='https://api.mailgun.net/v3/churchinperth.org/messages';
+our $SENDER ='no-reply@churchinperth.org';
+our $BCC ='wendygoh123@yahoo.com';
 
 #SMS gateway settings
 our $SMS_API='http://smsgateway.me/api/v3/messages/send';
@@ -57,7 +57,7 @@ To check your current usage please go to <a href="http://wifi.churchinperth.org"
 <P>
 Much grace to you! 
 <P>
-Jake He };
+Corporate Living Serving Ones };
 }
 
 sub email_subject {
@@ -77,7 +77,7 @@ You quota resets in $arg{remaining} day(s), on: $arg{reset_date}.
     
 Much Grace to you!
     
-Jake He}; 
+Corporate Living Serving Ones}; 
 }
 
 1;
